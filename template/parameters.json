@@ -1,0 +1,428 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "networkInterfaceName": {
+            "value": "sql973"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "networkSecurityGroupName": {
+            "value": "SQL-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "default-allow-rdp",
+                    "properties": {
+                        "priority": 1000,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceApplicationSecurityGroups": [],
+                        "destinationApplicationSecurityGroups": [],
+                        "sourceAddressPrefix": "10.221.100.5,10.221.2.100",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                },
+                {
+                    "name": "Allow_Sentry1",
+                    "properties": {
+                        "priority": 1100,
+                        "protocol": "Any",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceApplicationSecurityGroups": [],
+                        "destinationApplicationSecurityGroups": [],
+                        "sourceAddressPrefix": "10.221.20.214",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "1433"
+                    }
+                },
+                {
+                    "name": "Release_Servers",
+                    "properties": {
+                        "priority": 1200,
+                        "protocol": "Any",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceApplicationSecurityGroups": [],
+                        "destinationApplicationSecurityGroups": [],
+                        "sourceAddressPrefix": "10.221.2.100",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "1433,5985,5986"
+                    }
+                },
+                {
+                    "name": "Linked_Servers",
+                    "properties": {
+                        "priority": 1300,
+                        "protocol": "Any",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceApplicationSecurityGroups": [],
+                        "destinationApplicationSecurityGroups": [],
+                        "sourceAddressPrefix": "10.221.40.68,10.221.40.69,10.221.40.70,10.221.30.149,10.221.30.150,10.221.30.152",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "1433"
+                    }
+                },
+                {
+                    "name": "SQL_Communication",
+                    "properties": {
+                        "priority": 1400,
+                        "protocol": "Any",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceApplicationSecurityGroups": [],
+                        "destinationApplicationSecurityGroups": [],
+                        "sourceAddressPrefix": "10.221.30.149,10.221.30.150,10.221.30.153,10.221.21.20,10.221.21.9,10.221.40.68,10.221.40.69,10.221.40.70",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "1433,135,137,138,139,445"
+                    }
+                }
+                ]
+            },
+            "subnetName": {
+                "value": "SQL-Servers"
+            },
+            "virtualNetworkId": {
+                "value": "/subscriptions/2d661a6a-0c9a-461c-842c-5aac7ca47ae1/resourceGroups/DealCloud-Lab/providers/Microsoft.Network/virtualNetworks/DealCloud-Lab"
+            },
+            "virtualMachineName": {
+                "value": "SQL"
+            },
+            "virtualMachineRG": {
+                "value": "DealCloud-Lab"
+            },
+            "osDiskType": {
+                "value": "Premium_LRS"
+            },
+            "dataDisks": {
+                "value": [
+                    {
+                        "lun": 0,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_0",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 1,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_1",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 2,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_2",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 3,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_3",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 4,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_4",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 5,
+                        "createOption": "attach",
+                        "caching": "ReadOnly",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_5",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 6,
+                        "createOption": "attach",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_6",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 7,
+                        "createOption": "attach",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_7",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 8,
+                        "createOption": "attach",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_8",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 9,
+                        "createOption": "attach",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_9",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    },
+                    {
+                        "lun": 10,
+                        "createOption": "attach",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "id": null,
+                        "name": "SQL_DataDisk_10",
+                        "storageAccountType": null,
+                        "diskSizeGB": null
+                    }
+                ]
+            },
+            "dataDiskResources": {
+                "value": [
+                    {
+                        "name": "SQL_DataDisk_0",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_1",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_2",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_3",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_4",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_5",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_6",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_7",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_8",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_9",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    },
+                    {
+                        "name": "SQL_DataDisk_10",
+                        "sku": "Premium_LRS",
+                        "properties": {
+                            "diskSizeGB": 1024,
+                            "creationData": {
+                                "createOption": "empty"
+                            }
+                        }
+                    }
+                ]
+            },
+            "virtualMachineSize": {
+                "value": "Standard_DS15_v2"
+            },
+            "adminUsername": {
+                "value": "operator"
+            },
+            "adminPassword": {
+                "value": null
+            },
+            "diagnosticsStorageAccountName": {
+                "value": "dcimagelab"
+            },
+            "diagnosticsStorageAccountId": {
+                "value": "/subscriptions/2d661a6a-0c9a-461c-842c-5aac7ca47ae1/resourceGroups/DealCloud-Lab/providers/Microsoft.Storage/storageAccounts/dcimagelab"
+            },
+            "availabilitySetName": {
+                "value": "avset"
+            },
+            "availabilitySetPlatformFaultDomainCount": {
+                "value": 2
+            },
+            "availabilitySetPlatformUpdateDomainCount": {
+                "value": 5
+            },
+            "sqlVirtualMachineLocation": {
+                "value": "eastus"
+            },
+            "sqlVirtualMachineName": {
+                "value": "SQL"
+            },
+            "sqlConnectivityType": {
+                "value": "Private"
+            },
+            "sqlPortNumber": {
+                "value": 1433
+            },
+            "sqlStorageDisksCount": {
+                "value": 1
+            },
+            "sqlStorageWorkloadType": {
+                "value": "OLTP"
+            },
+            "sqlStorageDisksConfigurationType": {
+                "value": "NEW"
+            },
+            "sqlStorageStartingDeviceId": {
+                "value": 2
+            },
+            "sqlStorageDeploymentToken": {
+                "value": 11527
+            },
+            "sqlAuthenticationLogin": {
+                "value": "operator"
+            },
+            "sqlAuthenticationPassword": {
+                "value": null
+            },
+            "dataPath": {
+                "value": "F:\\data"
+            },
+            "dataDisksLUNs": {
+                "value": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "logPath": {
+                "value": "G:\\log"
+            },
+            "logDisksLUNs": {
+                "value": [
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ]
+            },
+            "tempDbPath": {
+                "value": "D:\\tempDb"
+            },
+            "rServicesEnabled": {
+                "value": "false"
+            }
+        }
+    }
